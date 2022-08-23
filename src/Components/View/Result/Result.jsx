@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Stack, Typography} from "@mui/material";
-import {useLocation, useNavigate} from "react-router-dom";
-import ResultDisplayContainer from "./ResultDisplayContainer";
+import React, { useEffect, useState } from 'react';
+import { Button, Stack, Typography } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ResultDisplayContainer from './ResultDisplayContainer';
 
 const INITIAL_STATE = {
     questionsList: [],
     correctAnswers: 0,
-    totalQuestions: 0,
+    totalQuestions: 0
 };
 
 const Result = () => {
-
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -18,17 +17,18 @@ const Result = () => {
     const [state, setState] = useState(INITIAL_STATE);
 
     const setQuestionList = () => {
-
-        const questionsList = location.state.questions.map(({question, correct_answer}, index) => ({
-            question: question,
-            isValid: location.state.answers[index] === correct_answer
-        }))
+        const questionsList = location.state.questions.map(
+            ({ question, correct_answer }, index) => ({
+                question: question,
+                isValid: location.state.answers[index] === correct_answer
+            })
+        );
 
         setState((prevState) => ({
             ...prevState,
             questionsList,
             totalQuestions: questionsList.length,
-            correctAnswers: questionsList.filter(({isValid}) => isValid).length,
+            correctAnswers: questionsList.filter(({ isValid }) => isValid).length
         }));
     };
 
@@ -50,35 +50,46 @@ const Result = () => {
         }
     }, []);
 
-    return (<>
-        <Stack sx={{
-            alignItems: 'center',
-            textAlign: 'center',
-            gap: 6,
-            p: '48px 8px',
-            width: '100%',
-            maxWidth: '600px',
-            mx: 'auto'
-        }}>
-            <Stack>
-                <Typography variant={'h4'}>You scored</Typography>
-                <Typography variant={'h4'}>
-                    {state.correctAnswers }
-                    <>
-                        &nbsp;&#x2f;&nbsp;
-                    </>
-                    {state.totalQuestions}
-                </Typography>
+    return (
+        <>
+            <Stack
+                sx={{
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    gap: 6,
+                    p: '48px 8px',
+                    width: '100%',
+                    maxWidth: '600px',
+                    mx: 'auto'
+                }}>
+                <Stack>
+                    <Typography variant={'h4'}>You scored</Typography>
+                    <Typography variant={'h4'}>
+                        {state.correctAnswers}
+                        <>&nbsp;&#x2f;&nbsp;</>
+                        {state.totalQuestions}
+                    </Typography>
+                </Stack>
+                <Stack gap={2.5}>
+                    <ResultDisplayContainer list={state.questionsList} />
+                </Stack>
+                <Stack direction={'row'} gap={3}>
+                    <Button
+                        size={'small'}
+                        sx={{ fontSize: '17px' }}
+                        onClick={onBeginButtonClickHandler}>
+                        Play Again?
+                    </Button>
+                    <Button
+                        size={'small'}
+                        sx={{ fontSize: '17px' }}
+                        onClick={onHomeButtonClickHandler}>
+                        Go to Home
+                    </Button>
+                </Stack>
             </Stack>
-            <Stack gap={2.5}>
-                <ResultDisplayContainer list={state.questionsList}/>
-            </Stack>
-            <Stack direction={'row'} gap={3}>
-                <Button size={'small'} sx={{fontSize: '17px'}} onClick={onBeginButtonClickHandler}>Play Again?</Button>
-                <Button size={'small'} sx={{fontSize: '17px'}} onClick={onHomeButtonClickHandler}>Go to Home</Button>
-            </Stack>
-        </Stack>
-    </>);
+        </>
+    );
 };
 
 export default Result;

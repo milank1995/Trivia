@@ -1,13 +1,14 @@
-import {Stack} from "@mui/material";
+import { Stack } from '@mui/material';
 
-const BaseIcon = ({src, width = '17px', height = '17px'}) => {
+/** 'BaseIcon' is common image container. **/
+const BaseIcon = ({ src, alt = '', width = '17px', height = '17px' }) => {
     return (
         <>
             <Stack width={width} height={height}>
-                <img src={src} alt={''} width={'100%'} height={'100%'}/>
+                <img src={src} alt={alt} width={'100%'} height={'100%'} />
             </Stack>
         </>
-    )
+    );
 };
 
 export default BaseIcon;
