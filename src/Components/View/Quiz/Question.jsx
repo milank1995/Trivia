@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, FormControlLabel, Radio, RadioGroup, Stack, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const INITIAL_STATE = {
     selectedValue: ''
@@ -57,6 +58,13 @@ const Question = ({ index, category, question, onSaveAndContinueClick }) => {
             </Stack>
         </>
     );
+};
+
+Question.propTypes = {
+    index: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+    question: PropTypes.string.isRequired,
+    onSaveAndContinueClick: PropTypes.func.isRequired
 };
 
 export default Question;

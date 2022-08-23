@@ -1,5 +1,7 @@
-import ResultDisplay from './ResultDisplay';
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import ResultDisplay from './ResultDisplay';
 
 const ResultDisplayContainer = ({ list }) => {
     return (
@@ -9,6 +11,10 @@ const ResultDisplayContainer = ({ list }) => {
             ))}
         </>
     );
+};
+
+ResultDisplayContainer.propTypes = {
+    list: PropTypes.array.isRequired
 };
 
 export default ResultDisplayContainer;

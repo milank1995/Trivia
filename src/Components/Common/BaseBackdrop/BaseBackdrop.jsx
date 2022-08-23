@@ -1,5 +1,6 @@
 import React from 'react';
 import { Backdrop, CircularProgress } from '@mui/material';
+import PropTypes from 'prop-types';
 
 /* This component is used to show a loader */
 const BaseBackdrop = ({ isOpen, onClick = (e) => e }) => {
@@ -13,6 +14,11 @@ const BaseBackdrop = ({ isOpen, onClick = (e) => e }) => {
             </Backdrop>
         </>
     );
+};
+
+BaseBackdrop.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClick: PropTypes.func
 };
 
 export default BaseBackdrop;
