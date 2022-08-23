@@ -1,4 +1,5 @@
 import { Stack } from '@mui/material';
+import PropTypes from 'prop-types';
 
 /** 'BaseIcon' is common image container. **/
 const BaseIcon = ({ src, alt = '', width = '17px', height = '17px' }) => {
@@ -9,6 +10,13 @@ const BaseIcon = ({ src, alt = '', width = '17px', height = '17px' }) => {
             </Stack>
         </>
     );
+};
+
+BaseIcon.propTypes = {
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string,
+    width: PropTypes.string,
+    height: PropTypes.string
 };
 
 export default BaseIcon;

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Stack, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 
 /* Required components and files */
 import BaseIcon from '../../Common/BaseIcon';
@@ -29,6 +30,11 @@ const ResultDisplay = ({ isValid, question }) => {
             </Stack>
         </>
     );
+};
+
+ResultDisplay.propTypes = {
+    isValid: PropTypes.bool.isRequired,
+    question: PropTypes.string.isRequired
 };
 
 export default ResultDisplay;
