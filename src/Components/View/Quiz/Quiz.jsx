@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
-import axios from 'axios';
 
 import Question from './Question';
 import BaseBackdrop from '../../Common/BaseBackdrop';
+import { GET_QUESTIONS_URL } from '../../../HttpsAction/ApiUrls';
+import HttpsAction from '../../../HttpsAction';
 
-const QUESTIONS_URL = 'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean';
 const INITIAL_STATE = {
     questions: [],
     currentQuestion: 0,
@@ -23,8 +23,11 @@ const Quiz = () => {
     /* Getting a questions array.  */
     const getQuestions = async () => {
         try {
-            const response = await axios({
-                url: QUESTIONS_URL
+            const response = await HttpsAction({
+                url: GET_QUESTIONS_URL,
+                negativeCallBack: (error) => {
+                    throw Error(error);
+                }
             });
 
             setState((prevState) => ({
