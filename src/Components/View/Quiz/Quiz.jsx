@@ -8,7 +8,7 @@ import BaseBackdrop from "../../Common/BaseBackdrop";
 
 const QUESTIONS_URL = 'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean';
 const INITIAL_STATE = {
-    questions: [], currentQuestion: 0, isLoading: true,
+    questions: [], currentQuestion: 0, isLoading: true, answers: {},
 };
 
 const Quiz = () => {
@@ -42,21 +42,30 @@ const Quiz = () => {
         })
     };
 
-    const goToResult = () => {
-        navigate('/result');
+    const goToResult = (obj) => {
+        navigate('/result', {state: {questions: state.questions, answers: {...state.answers, [obj.index]: obj.value}}});
     };
 
     const goToNextQuestion = () => {
         setState((prevState) => ({
-            ...prevState, currentQuestion: prevState.currentQuestion + 1
+            ...prevState,
+            currentQuestion: prevState.currentQuestion + 1,
         }));
-    }
-
-    /** Event Handlers **/
-    const onSaveAndContinueClickHandler = () => {
-        state.currentQuestion + 2 === state.questions.length ? goToResult() : goToNextQuestion()
     };
 
+    const saveAnswer = (obj) => {
+        setState((prevState) => ({
+            ...prevState,
+            answers: {...prevState.answers, [obj.index]: obj.value}
+        }));
+
+    };
+
+    /** Event Handlers **/
+    const onSaveAndContinueClickHandler = (obj) => {
+        saveAnswer(obj);
+        state.currentQuestion + 1 === state.questions.length ? goToResult(obj) : goToNextQuestion(obj)
+    };
 
     /** useEffects **/
     useEffect(() => {

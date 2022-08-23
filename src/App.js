@@ -1,13 +1,9 @@
-
 import React from 'react';
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
 import {Home, Quiz, Result} from "./Components/View";
 
 const App = () => {
-
-    // console.log("App.js");
-
     return (<>
         <BrowserRouter>
             <Routes>
